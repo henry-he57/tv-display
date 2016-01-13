@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import com.teknikindustries.yahooweather.WeatherDisplay;
+import com.teknikindustries.yahooweather.WeatherDoc;
 import java.util.List;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
@@ -39,7 +41,25 @@ public class TwitterJFrame extends javax.swing.JFrame {
     public TwitterJFrame() {
         initComponents();
     }
+    //Your Twitter App's Consumer Key
+    String consumerKey = "iuQCb5R7W28H46DAMzUHM2slo";
 
+    //Your Twitter App's Consumer Secret
+    String consumerSecret = "pZxzt1uHOoKByI1Gr6ub0lUME3K4xLdxLzKvzfZsfHYesd5bJ5";
+
+    //Your Twitter Access Token
+    String accessToken = "4736054183-0r6cUOMERw9Y3lSqZAefJxFSOJ9LHWaa90WlP84";
+
+    //Your Twitter Access Token Secret
+    String accessTokenSecret = "luF2CzgnRLmpNhK5snVJn6FvsQcwMeaOuQXTO5la8KKz1";
+
+    //Instantiate a re-usable and thread-safe factory
+    TwitterFactory twitterFactory = new TwitterFactory();
+
+    WeatherDoc doc = new WeatherDoc("4113","c"); //Your weather API location and units system
+    
+    WeatherDisplay disp = new WeatherDisplay(); //Create WeatherDisplay object 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,73 +70,108 @@ public class TwitterJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
+        weather1 = new weather();
         jButton2 = new javax.swing.JButton();
+        twitter1 = new twitter();
+        weather2 = new weather();
+
+        javax.swing.GroupLayout weather1Layout = new javax.swing.GroupLayout(weather1);
+        weather1.setLayout(weather1Layout);
+        weather1Layout.setHorizontalGroup(
+            weather1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        weather1Layout.setVerticalGroup(
+            weather1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Update Tweets");
+        jButton2.setText("Update");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+        javax.swing.GroupLayout twitter1Layout = new javax.swing.GroupLayout(twitter1);
+        twitter1.setLayout(twitter1Layout);
+        twitter1Layout.setHorizontalGroup(
+            twitter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+        );
+        twitter1Layout.setVerticalGroup(
+            twitter1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 125, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout weather2Layout = new javax.swing.GroupLayout(weather2);
+        weather2.setLayout(weather2Layout);
+        weather2Layout.setHorizontalGroup(
+            weather2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        weather2Layout.setVerticalGroup(
+            weather2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 375, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(52, 52, 52)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(weather2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(twitter1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(jButton2)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jButton2))
+                    .addComponent(weather2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(twitter1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-  //Your Twitter App's Consumer Key
-         String consumerKey = "iuQCb5R7W28H46DAMzUHM2slo";
 
-         //Your Twitter App's Consumer Secret
-         String consumerSecret = "pZxzt1uHOoKByI1Gr6ub0lUME3K4xLdxLzKvzfZsfHYesd5bJ5";
+        //Instantiate a new Twitter instance
+        Twitter twitter = twitterFactory.getInstance();
 
-         //Your Twitter Access Token
-         String accessToken = "4736054183-0r6cUOMERw9Y3lSqZAefJxFSOJ9LHWaa90WlP84";
+        //setup OAuth Consumer Credentials
+        twitter.setOAuthConsumer(consumerKey, consumerSecret);
 
-         //Your Twitter Access Token Secret
-         String accessTokenSecret = "luF2CzgnRLmpNhK5snVJn6FvsQcwMeaOuQXTO5la8KKz1";
+        //setup OAuth Access Token
+        twitter.setOAuthAccessToken(new AccessToken(accessToken, accessTokenSecret));
 
-         //Instantiate a re-usable and thread-safe factory
-         TwitterFactory twitterFactory = new TwitterFactory();
-
-         //Instantiate a new Twitter instance
-         Twitter twitter = twitterFactory.getInstance();
-
-         //setup OAuth Consumer Credentials
-         twitter.setOAuthConsumer(consumerKey, consumerSecret);
-
-         //setup OAuth Access Token
-         twitter.setOAuthAccessToken(new AccessToken(accessToken, accessTokenSecret));
-
-         
+        
+        String temp = disp.getTemperature();
+        String tempU = disp.getTemperatureUnit();
+        String condit = disp.getCondition();
+        
+        System.out.println(condit);
+        System.out.println(temp + " " + tempU);
+        
         try {
             List<Status> statuses = twitter.getHomeTimeline();
             System.out.println("Showing home timeline:");
-            for (Status status:statuses){
+            for (Status status : statuses) {
                 System.out.println(status.getUser().getName() + ":" + status.getText());
             }
-            
+
             //Instantiate and initialize a new twitter status update
             //StatusUpdate statusUpdate = new StatusUpdate("NHS Display's First Tweet!");
-            
             //+ " - http://h1b-work-visa-usa.blogspot.com/2013/07/h-1b-transfer-jobs-java-developer_19.html");
             //attach any media, if you want to
             /*
@@ -159,7 +214,7 @@ public class TwitterJFrame extends javax.swing.JFrame {
             }catch(TwitterException e){
             
             }
-            */
+             */
         } catch (TwitterException ex) {
             java.util.logging.Logger.getLogger(TwitterJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -205,5 +260,8 @@ public class TwitterJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private twitter twitter1;
+    private weather weather1;
+    private weather weather2;
     // End of variables declaration//GEN-END:variables
 }
