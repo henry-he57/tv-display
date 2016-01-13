@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-import com.teknikindustries.yahooweather.WeatherDisplay;
-import com.teknikindustries.yahooweather.WeatherDoc;
 import java.util.List;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
@@ -40,6 +38,7 @@ public class TwitterJFrame extends javax.swing.JFrame {
      */
     public TwitterJFrame() {
         initComponents();
+        weather2.start();
     }
     //Your Twitter App's Consumer Key
     String consumerKey = "iuQCb5R7W28H46DAMzUHM2slo";
@@ -51,14 +50,10 @@ public class TwitterJFrame extends javax.swing.JFrame {
     String accessToken = "4736054183-0r6cUOMERw9Y3lSqZAefJxFSOJ9LHWaa90WlP84";
 
     //Your Twitter Access Token Secret
-    String accessTokenSecret = "luF2CzgnRLmpNhK5snVJn6FvsQcwMeaOuQXTO5la8KKz1";
-
-    //Instantiate a re-usable and thread-safe factory
-    TwitterFactory twitterFactory = new TwitterFactory();
-
-    WeatherDoc doc = new WeatherDoc("4113","c"); //Your weather API location and units system
+    String accessTokenSecret = "luF2CzgnRLmpNhK5snVJn6FvsQcwMeaOuQXTO5la8KKz1"; 
     
-    WeatherDisplay disp = new WeatherDisplay(); //Create WeatherDisplay object 
+//Instantiate a re-usable and thread-safe factory
+    TwitterFactory twitterFactory = new TwitterFactory();
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,13 +150,6 @@ public class TwitterJFrame extends javax.swing.JFrame {
         //setup OAuth Access Token
         twitter.setOAuthAccessToken(new AccessToken(accessToken, accessTokenSecret));
 
-        
-        String temp = disp.getTemperature();
-        String tempU = disp.getTemperatureUnit();
-        String condit = disp.getCondition();
-        
-        System.out.println(condit);
-        System.out.println(temp + " " + tempU);
         
         try {
             List<Status> statuses = twitter.getHomeTimeline();

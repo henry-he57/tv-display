@@ -1,3 +1,11 @@
+
+import com.teknikindustries.yahooweather.WeatherDisplay;
+import com.teknikindustries.yahooweather.WeatherDoc;
+import java.awt.event.ActionListener;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +18,44 @@
  */
 public class weather extends javax.swing.JPanel {
 
+    Timer t1 = new Timer(10000, (ActionListener) new TimerListener());
+    
+    WeatherDoc doc = new WeatherDoc("4113","c"); //Your weather API location and units system
+    
+    WeatherDisplay disp = new WeatherDisplay(); //Create WeatherDisplay object
+    
+    String temp, tempU, conditions, wChill;
     /**
      * Creates new form weather
      */
     public weather() {
         initComponents();
+    }
+    
+    public void start(){
+        t1.start();
+    }
+    
+    private class TimerListener implements ActionListener {
+        
+        public void actionPerformed(ActionEvent e) {
+            getWeather();
+            showWeather();
+        }
+    }
+    
+    private void getWeather(){
+        temp = disp.getTemperature();
+        tempU = disp.getTemperatureUnit();
+        conditions = disp.getCondition();
+        wChill = disp.getWindChill();
+    }
+    
+    private void showWeather(){
+        System.out.println(conditions);
+        System.out.println(temp + " " + tempU);
+        System.out.println(wChill + " " + tempU + "  with wind chill.");
+        
     }
 
     /**
