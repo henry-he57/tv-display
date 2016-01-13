@@ -150,7 +150,6 @@ public class TwitterJFrame extends javax.swing.JFrame {
         //setup OAuth Access Token
         twitter.setOAuthAccessToken(new AccessToken(accessToken, accessTokenSecret));
 
-        
         try {
             List<Status> statuses = twitter.getHomeTimeline();
             System.out.println("Showing home timeline:");

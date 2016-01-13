@@ -3,6 +3,8 @@ import com.teknikindustries.yahooweather.WeatherDisplay;
 import com.teknikindustries.yahooweather.WeatherDoc;
 import java.awt.event.ActionListener;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 
@@ -25,6 +27,7 @@ public class weather extends javax.swing.JPanel {
     WeatherDisplay disp = new WeatherDisplay(); //Create WeatherDisplay object
     
     String temp, tempU, conditions, wChill;
+    Image weatherBackground = Toolkit.getDefaultToolkit().getImage("space25.jpg");
     /**
      * Creates new form weather
      */
@@ -41,6 +44,7 @@ public class weather extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             getWeather();
             showWeather();
+            repaint();
         }
     }
     
@@ -56,6 +60,10 @@ public class weather extends javax.swing.JPanel {
         System.out.println(temp + " " + tempU);
         System.out.println(wChill + " " + tempU + "  with wind chill.");
         
+    }
+    
+    public void paintComponents(Graphics g) {
+        g.drawImage(weatherBackground, 0, 0, this);
     }
 
     /**
