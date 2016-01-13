@@ -44,6 +44,8 @@ public class weather extends javax.swing.JPanel {
     private class TimerListener implements ActionListener {
         
         public void actionPerformed(ActionEvent e) {
+            getWeather();
+            showWeather();
             repaint();
         }
     }
@@ -63,8 +65,6 @@ public class weather extends javax.swing.JPanel {
     }
     
     public void paintComponents(Graphics g) {
-        getWeather();
-        showWeather();
         g.drawImage(weatherBackground, 0, 0, this);
     }
 
