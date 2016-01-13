@@ -28,6 +28,8 @@ public class weather extends javax.swing.JPanel {
     
     String temp, tempU, conditions, wChill;
     Image weatherBackground = Toolkit.getDefaultToolkit().getImage("space25.jpg");
+    
+    
     /**
      * Creates new form weather
      */
@@ -42,8 +44,6 @@ public class weather extends javax.swing.JPanel {
     private class TimerListener implements ActionListener {
         
         public void actionPerformed(ActionEvent e) {
-            getWeather();
-            showWeather();
             repaint();
         }
     }
@@ -63,6 +63,8 @@ public class weather extends javax.swing.JPanel {
     }
     
     public void paintComponents(Graphics g) {
+        getWeather();
+        showWeather();
         g.drawImage(weatherBackground, 0, 0, this);
     }
 
