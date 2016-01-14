@@ -39,22 +39,10 @@ public class TwitterJFrame extends javax.swing.JFrame {
     public TwitterJFrame() {
         initComponents();
         weather2.start();
+        //twitter1.startTwitterTimer();
     }
-    //Your Twitter App's Consumer Key
-    String consumerKey = "iuQCb5R7W28H46DAMzUHM2slo";
-
-    //Your Twitter App's Consumer Secret
-    String consumerSecret = "pZxzt1uHOoKByI1Gr6ub0lUME3K4xLdxLzKvzfZsfHYesd5bJ5";
-
-    //Your Twitter Access Token
-    String accessToken = "4736054183-0r6cUOMERw9Y3lSqZAefJxFSOJ9LHWaa90WlP84";
-
-    //Your Twitter Access Token Secret
-    String accessTokenSecret = "luF2CzgnRLmpNhK5snVJn6FvsQcwMeaOuQXTO5la8KKz1"; 
     
-//Instantiate a re-usable and thread-safe factory
-    TwitterFactory twitterFactory = new TwitterFactory();
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,30 +53,18 @@ public class TwitterJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        weather1 = new weather();
-        jButton2 = new javax.swing.JButton();
+        TwitterScrollPane = new javax.swing.JScrollPane();
+        TweetTextArea = new javax.swing.JTextArea();
         twitter1 = new twitter();
         weather2 = new weather();
 
-        javax.swing.GroupLayout weather1Layout = new javax.swing.GroupLayout(weather1);
-        weather1.setLayout(weather1Layout);
-        weather1Layout.setHorizontalGroup(
-            weather1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        weather1Layout.setVerticalGroup(
-            weather1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        TwitterScrollPane.setAutoscrolls(true);
+
+        TweetTextArea.setColumns(20);
+        TweetTextArea.setRows(5);
+        TwitterScrollPane.setViewportView(TweetTextArea);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout twitter1Layout = new javax.swing.GroupLayout(twitter1);
         twitter1.setLayout(twitter1Layout);
@@ -117,20 +93,14 @@ public class TwitterJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(52, 600, Short.MAX_VALUE)
                 .addComponent(weather2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(twitter1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton2))
-                    .addComponent(weather2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(weather2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(twitter1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -138,75 +108,6 @@ public class TwitterJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        //Instantiate a new Twitter instance
-        Twitter twitter = twitterFactory.getInstance();
-
-        //setup OAuth Consumer Credentials
-        twitter.setOAuthConsumer(consumerKey, consumerSecret);
-
-        //setup OAuth Access Token
-        twitter.setOAuthAccessToken(new AccessToken(accessToken, accessTokenSecret));
-
-        try {
-            List<Status> statuses = twitter.getHomeTimeline();
-            System.out.println("Showing home timeline:");
-            for (Status status : statuses) {
-                System.out.println(status.getUser().getName() + ":" + status.getText());
-            }
-
-            //Instantiate and initialize a new twitter status update
-            //StatusUpdate statusUpdate = new StatusUpdate("NHS Display's First Tweet!");
-            //+ " - http://h1b-work-visa-usa.blogspot.com/2013/07/h-1b-transfer-jobs-java-developer_19.html");
-            //attach any media, if you want to
-            /*
-            statusUpdate.setMedia(
-            //title of media
-            "http://h1b-work-visa-usa.blogspot.com", new URL("http://lh6.ggpht.com/-NiYLR6SkOmc/Uen_M8CpB7I/AAAAAAAAEQ8/tO7fufmK0Zg/h-1b%252520transfer%252520jobs%25255B4%25255D.png?imgmax=800").openStream());
-            
-            //tweet or update status
-            Status status = twitter.updateStatus(statusUpdate);
-            
-            //response from twitter server
-            System.out.println("status.toString() = " + status.toString());
-            System.out.println("status.getInReplyToScreenName() = " + status.getInReplyToScreenName());
-            System.out.println("status.getSource() = " + status.getSource());
-            System.out.println("status.getText() = " + status.getText());
-            System.out.println("status.getContributors() = " + Arrays.toString(status.getContributors()));
-            System.out.println("status.getCreatedAt() = " + status.getCreatedAt());
-            System.out.println("status.getCurrentUserRetweetId() = " + status.getCurrentUserRetweetId());
-            System.out.println("status.getGeoLocation() = " + status.getGeoLocation());
-            System.out.println("status.getId() = " + status.getId());
-            System.out.println("status.getInReplyToStatusId() = " + status.getInReplyToStatusId());
-            System.out.println("status.getInReplyToUserId() = " + status.getInReplyToUserId());
-            System.out.println("status.getPlace() = " + status.getPlace());
-            System.out.println("status.getRetweetCount() = " + status.getRetweetCount());
-            System.out.println("status.getRetweetedStatus() = " + status.getRetweetedStatus());
-            System.out.println("status.getUser() = " + status.getUser());
-            System.out.println("status.getAccessLevel() = " + status.getAccessLevel());
-            System.out.println("status.getHashtagEntities() = " + Arrays.toString(status.getHashtagEntities()));
-            System.out.println("status.getMediaEntities() = " + Arrays.toString(status.getMediaEntities()));
-            if (status.getRateLimitStatus() != null) {
-            System.out.println("status.getRateLimitStatus().getLimit() = " + status.getRateLimitStatus().getLimit());
-            System.out.println("status.getRateLimitStatus().getRemaining() = " + status.getRateLimitStatus().getRemaining());
-            System.out.println("status.getRateLimitStatus().getResetTimeInSeconds() = " + status.getRateLimitStatus().getResetTimeInSeconds());
-            System.out.println("status.getRateLimitStatus().getSecondsUntilReset() = " + status.getRateLimitStatus().getSecondsUntilReset());
-            //  System.out.println("status.getRateLimitStatus().getRemainingHits() = " + status.getRateLimitStatus().getRemainingHits());
-            }
-            System.out.println("status.getURLEntities() = " + Arrays.toString(status.getURLEntities()));
-            System.out.println("status.getUserMentionEntities() = " + Arrays.toString(status.getUserMentionEntities()));
-            
-            }catch(TwitterException e){
-            
-            }
-             */
-        } catch (TwitterException ex) {
-            java.util.logging.Logger.getLogger(TwitterJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,10 +146,10 @@ public class TwitterJFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextArea TweetTextArea;
+    private javax.swing.JScrollPane TwitterScrollPane;
     private javax.swing.JScrollPane jScrollPane1;
     private twitter twitter1;
-    private weather weather1;
     private weather weather2;
     // End of variables declaration//GEN-END:variables
 }

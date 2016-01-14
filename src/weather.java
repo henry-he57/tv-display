@@ -54,7 +54,7 @@ public class weather extends javax.swing.JPanel {
     }
 
     private void showWeather(Graphics g) {
-        g.setFont();
+       // g.setFont();
         g.drawString(conditions,0,0);
         System.out.println(temp + " " + tempU);
         System.out.println(wChill + " " + tempU + "  with wind chill.");
