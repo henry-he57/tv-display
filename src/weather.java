@@ -13,7 +13,6 @@ import javax.swing.Timer;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author night
@@ -21,51 +20,52 @@ import javax.swing.Timer;
 public class weather extends javax.swing.JPanel {
 
     Timer t1 = new Timer(10000, (ActionListener) new TimerListener());
-    
-    WeatherDoc doc = new WeatherDoc("4113","c"); //Your weather API location and units system
-    
+
+    WeatherDoc doc = new WeatherDoc("4113", "c"); //Your weather API location and units system
+
     WeatherDisplay disp = new WeatherDisplay(); //Create WeatherDisplay object
-    
+
     String temp, tempU, conditions, wChill;
     Image weatherBackground = Toolkit.getDefaultToolkit().getImage("space25.jpg");
-    
-    
+
     /**
      * Creates new form weather
      */
     public weather() {
         initComponents();
     }
-    
-    public void start(){
+
+    public void start() {
         t1.start();
     }
-    
+
     private class TimerListener implements ActionListener {
-        
+
         public void actionPerformed(ActionEvent e) {
-            getWeather();
-            showWeather();
             repaint();
         }
     }
-    
-    private void getWeather(){
+
+    private void getWeather() {
         temp = disp.getTemperature();
         tempU = disp.getTemperatureUnit();
         conditions = disp.getCondition();
         wChill = disp.getWindChill();
     }
-    
-    private void showWeather(){
-        System.out.println(conditions);
+
+    private void showWeather(Graphics g) {
+        g.setFont();
+        g.drawString(conditions,0,0);
         System.out.println(temp + " " + tempU);
         System.out.println(wChill + " " + tempU + "  with wind chill.");
-        
+
     }
-    
-    public void paintComponents(Graphics g) {
+
+    public void paintComponent(Graphics g) {
+        getWeather();
         g.drawImage(weatherBackground, 0, 0, this);
+        showWeather(g);
+
     }
 
     /**
@@ -77,19 +77,30 @@ public class weather extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addContainerGap(345, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jLabel1)
+                .addContainerGap(209, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
