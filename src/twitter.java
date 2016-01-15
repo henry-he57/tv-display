@@ -70,7 +70,7 @@ public class twitter extends javax.swing.JPanel {
     }
     
     public void paintComponent(Graphics g){
-        updateTweets();
+        //updateTweets();
     }
 
     public void startTwitterTimer(){
