@@ -39,7 +39,7 @@ public class TwitterJFrame extends javax.swing.JFrame {
     public TwitterJFrame() {
         initComponents();
         weather2.start();
-        //twitter1.startTwitterTimer();
+        twitter1.startTwitterTimer();
     }
     
 
