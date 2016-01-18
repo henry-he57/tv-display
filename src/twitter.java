@@ -65,16 +65,18 @@ public class twitter extends javax.swing.JPanel {
     private class TimerListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
+            updateTweets();
             repaint();
         }
     }
     
     public void paintComponent(Graphics g){
-        updateTweets();
+        
     }
 
     public void startTwitterTimer(){
         tweetRefresh.start();
+        updateTweets();
     }
    
 

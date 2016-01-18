@@ -30,8 +30,11 @@ public class weather extends javax.swing.JPanel {
     String temp, tempU, conditions, wChill;
     Image weatherBackground = Toolkit.getDefaultToolkit().getImage("space25.jpg");
     Image mixedRainAndSnow = Toolkit.getDefaultToolkit().getImage("weatherIcons\\mixed rain and snow.png");
+    Image partlyCloudy = Toolkit.getDefaultToolkit().getImage("weatherIcons\\partly cloudy.png");
     
+
     Font font;
+
     /**
      * Creates new form weather
      */
@@ -41,6 +44,8 @@ public class weather extends javax.swing.JPanel {
 
     public void start() {
         t1.start();
+        getWeather();
+        repaint();
     }
 
     private class TimerListener implements ActionListener {
@@ -62,7 +67,7 @@ public class weather extends javax.swing.JPanel {
         font = new Font("Calisto MT", Font.PLAIN, 15);
         g.setFont(font);
         g.setColor(Color.white);
-        
+
         g.drawString(" Conditions: " + conditions, 0, 290);
         g.drawString(" Tempurture: " + temp + " " + tempU, 0, 310);
         g.drawString(" Wind chill: " + wChill + " " + tempU, 0, 330);
@@ -71,7 +76,7 @@ public class weather extends javax.swing.JPanel {
 
     public void paintComponent(Graphics g) {
         g.drawImage(weatherBackground, 0, 0, this);
-        g.drawImage(mixedRainAndSnow, 0, -100, this);
+        g.drawImage(partlyCloudy, -15, -125, this);
         showWeather(g);
 
     }
