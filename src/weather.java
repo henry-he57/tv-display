@@ -31,7 +31,13 @@ public class weather extends javax.swing.JPanel {
     Image weatherBackground = Toolkit.getDefaultToolkit().getImage("space25.jpg");
     Image mixedRainAndSnow = Toolkit.getDefaultToolkit().getImage("weatherIcons\\mixed rain and snow.png");
     Image partlyCloudy = Toolkit.getDefaultToolkit().getImage("weatherIcons\\partly cloudy.png");
-    
+    Image cloudy = Toolkit.getDefaultToolkit().getImage("weatherIcons\\cloudy.png");
+    Image mostlyCloudy = Toolkit.getDefaultToolkit().getImage("weatherIcons\\mostly cloudy.png");
+    Image scatteredShowers = Toolkit.getDefaultToolkit().getImage("weatherIcons\\scattered showers.png");
+    Image showers = Toolkit.getDefaultToolkit().getImage("weatherIcons\\showers.png");
+    Image snow = Toolkit.getDefaultToolkit().getImage("weatherIcons\\snow.png");
+    Image sunny = Toolkit.getDefaultToolkit().getImage("weatherIcons\\sunny.png");
+    Image tornado = Toolkit.getDefaultToolkit().getImage("weatherIcons\\ tornado.png");
 
     Font font;
 
@@ -76,9 +82,20 @@ public class weather extends javax.swing.JPanel {
 
     public void paintComponent(Graphics g) {
         g.drawImage(weatherBackground, 0, 0, this);
-        g.drawImage(partlyCloudy, -15, -125, this);
+        Image show = null;
+        if (conditions.equals("Light Snow Shower")){
+            show = mixedRainAndSnow;
+        } else if (conditions.equals("Partly Cloudy")){
+            show = partlyCloudy;
+        } else if (conditions.equals("Couldy")){
+            
+        } else if (conditions.equals("Mostly Cloudy")){
+            
+        } else if (conditions.equals("Scattered Showers")){
+            
+        }
+        g.drawImage(show, -15, -125, this);
         showWeather(g);
-
     }
 
     /**
