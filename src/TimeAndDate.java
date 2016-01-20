@@ -17,11 +17,25 @@ import javax.swing.JLabel;
 public class TimeAndDate extends javax.swing.JPanel {
 Image clockBackground = Toolkit.getDefaultToolkit().getImage("ClockBackground.jpg");
 Image scaledClockBackground = clockBackground.getScaledInstance(390, 220, Image.SCALE_SMOOTH);
+JLabel tempLabel;
     /**
      * Creates new form TimeAndDate
      */
     public TimeAndDate() {
         initComponents();
+        
+        new Thread(){
+            public void run(){
+                while(true){
+                    Calendar cal = new GregorianCalendar();
+        int second = cal.get(Calendar.SECOND);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        int AM_PM = cal.get(Calendar.AM_PM);
+        tempLabel.setText(hour + ":" + minute + ":" + second);
+                }
+            }
+        }.start();
     }
 
     public void currentDate(JLabel dateLabel){
@@ -38,12 +52,10 @@ Image scaledClockBackground = clockBackground.getScaledInstance(390, 220, Image.
         int second = cal.get(Calendar.SECOND);
         int minute = cal.get(Calendar.MINUTE);
         int hour = cal.get(Calendar.HOUR);
-        timeLabel.setText(hour + ":" + minute + ":" + second);
+        int AM_PM = cal.get(Calendar.AM_PM);
+        //timeLabel.setText(hour + ":" + minute + ":" + second);
     }
     
-    public void paintComponent(Graphics g){
-        g.drawImage(scaledClockBackground, WIDTH, WIDTH, this);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

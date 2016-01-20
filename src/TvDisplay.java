@@ -93,9 +93,9 @@ public class TvDisplay extends javax.swing.JFrame {
             .addGap(0, 86, Short.MAX_VALUE)
         );
 
-        time.setFont(new java.awt.Font("Serif", 1, 60)); // NOI18N
+        time.setFont(new java.awt.Font("DS-Digital", 1, 60)); // NOI18N
+        time.setForeground(new java.awt.Color(0, 165, 255));
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        time.setText("07:45:35");
         time.setToolTipText("");
         time.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
