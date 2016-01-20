@@ -4,29 +4,6 @@
  * and open the template in the editor.
  */
 
-import java.util.List;
-import twitter4j.*;
-import twitter4j.auth.AccessToken;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
-
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
-
 /**
  *
  * @author 341167922

@@ -23,16 +23,16 @@ import twitter4j.auth.AccessToken;
 public class twitter extends javax.swing.JPanel {
 
     Timer tweetRefresh = new Timer (120000, (ActionListener) new TimerListener());
-     //Your Twitter App's Consumer Key
+     //the Twitter consumer key
     String consumerKey = "iuQCb5R7W28H46DAMzUHM2slo";
 
-    //Your Twitter App's Consumer Secret
+    //the Twitter consumer secret
     String consumerSecret = "pZxzt1uHOoKByI1Gr6ub0lUME3K4xLdxLzKvzfZsfHYesd5bJ5";
 
-    //Your Twitter Access Token
+    //the Twitter access token
     String accessToken = "4736054183-0r6cUOMERw9Y3lSqZAefJxFSOJ9LHWaa90WlP84";
 
-    //Your Twitter Access Token Secret
+    //the access token secret
     String accessTokenSecret = "luF2CzgnRLmpNhK5snVJn6FvsQcwMeaOuQXTO5la8KKz1";
 
     //Instantiate a re-usable and thread-safe factory
@@ -51,6 +51,9 @@ public class twitter extends javax.swing.JPanel {
         setKey();
     }
     
+    /**
+     * Setup Twitter authentication credentials
+     */
     public void setKey(){
         //setup OAuth Consumer Credentials
         twitter.setOAuthConsumer(consumerKey, consumerSecret);
@@ -58,8 +61,6 @@ public class twitter extends javax.swing.JPanel {
         //setup OAuth Access Token
         twitter.setOAuthAccessToken(
                 new AccessToken(accessToken, accessTokenSecret));
-    
-    
 }
     
     private class TimerListener implements ActionListener {
@@ -71,7 +72,6 @@ public class twitter extends javax.swing.JPanel {
     }
     
     public void paintComponent(Graphics g){
-        
     }
 
     public void startTwitterTimer(){
@@ -81,7 +81,6 @@ public class twitter extends javax.swing.JPanel {
    
 
     public void updateTweets() {
-        
 
         try {
             List<Status> statuses = twitter.getHomeTimeline();
