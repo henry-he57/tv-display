@@ -3,13 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JLabel;
 /**
  *
  * @author Henry
  */
 public class TimeAndDate extends javax.swing.JPanel {
-
+Image clockBackground = Toolkit.getDefaultToolkit().getImage("ClockBackground.jpg");
+Image scaledClockBackground = clockBackground.getScaledInstance(390, 220, Image.SCALE_SMOOTH);
     /**
      * Creates new form TimeAndDate
      */
@@ -17,6 +24,26 @@ public class TimeAndDate extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void currentDate(JLabel dateLabel){
+        Calendar cal = new GregorianCalendar();
+        int month = cal.get(Calendar.MONTH);
+        String monthString = new DateFormatSymbols().getMonths()[month];
+        int year = cal.get(Calendar.YEAR);
+        int date = cal.get(Calendar.DAY_OF_MONTH);
+        dateLabel.setText(monthString + " " + date + ", " + year);
+    }
+    
+    public void currentTime(JLabel timeLabel){
+        Calendar cal = new GregorianCalendar();
+        int second = cal.get(Calendar.SECOND);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        timeLabel.setText(hour + ":" + minute + ":" + second);
+    }
+    
+    public void paintComponent(Graphics g){
+        g.drawImage(scaledClockBackground, WIDTH, WIDTH, this);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
