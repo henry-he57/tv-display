@@ -17,12 +17,14 @@ import twitter4j.auth.AccessToken;
  */
 /**
  *
- * @author night
+ * @author Henry
  */
 
-public class twitter extends javax.swing.JPanel {
+public class TwitterFeed extends javax.swing.JPanel {
 
+    //create a timer to refresh tweets every 2 minutes
     Timer tweetRefresh = new Timer (120000, (ActionListener) new TimerListener());
+    
      //the Twitter consumer key
     String consumerKey = "iuQCb5R7W28H46DAMzUHM2slo";
 
@@ -41,12 +43,10 @@ public class twitter extends javax.swing.JPanel {
     //Instantiate a new Twitter instance
     Twitter twitter = twitterFactory.getInstance();
     
-
-    
     /**
      * Creates new form twitter
      */
-    public twitter() {
+    public TwitterFeed() {
         initComponents();
         setKey();
     }
@@ -79,15 +79,17 @@ public class twitter extends javax.swing.JPanel {
         updateTweets();
     }
    
-
+    /**
+     * Updates the Twitter feed on the display with new tweets
+     */
     public void updateTweets() {
-
         try {
-            List<Status> statuses = twitter.getHomeTimeline();
-            System.out.println("Showing home timeline:");
+            List<Status> statuses = twitter.getHomeTimeline();  //list to store tweets from Twitter
+
             for (Status status : statuses) {
                 System.out.println(status.getUser().getName() + ":" + status.getText());
             }
+            
             //TweetTextArea.
 
             //Instantiate and initialize a new twitter status update
@@ -136,7 +138,7 @@ public class twitter extends javax.swing.JPanel {
              }
              */
         } catch (TwitterException ex) {
-            java.util.logging.Logger.getLogger(TwitterJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TvDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

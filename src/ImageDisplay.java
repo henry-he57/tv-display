@@ -1,3 +1,11 @@
+
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.Timer;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,13 +18,46 @@
  */
 public class ImageDisplay extends javax.swing.JPanel {
 
+    String[] list = {"pictures\\Image1.jpg","pictures\\Image2.jpg","pictures\\Image3.jpg","pictures\\Image4.jpg","pictures\\Image5.jpg"};
+    int x = 1;
+    Timer slideshow;
+    JLabel temp;
+    
     /**
      * Creates new form ImageDisplay
      */
     public ImageDisplay() {
         initComponents();
-    }
+        
+        slideshow = new Timer (10000, new ActionListener(){
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setImageSize(x, temp);
+            x+=1;
+            if (x >= list.length){
+                x = 0;
+            }
+        }
+        
+    });
+        
+    }
+    
+    public void setImageSize(int i,JLabel pic){
+        ImageIcon icon = new ImageIcon(list[i]);
+        Image img = icon.getImage();
+        Image scaledImg = img.getScaledInstance(910, 575, Image.SCALE_SMOOTH);
+        ImageIcon newImc = new ImageIcon(scaledImg);
+        pic.setIcon(newImc);
+    }
+    
+    public void startSlideShow(JLabel pic){
+        slideshow.start();
+        setImageSize(0,pic );
+        temp = pic;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
