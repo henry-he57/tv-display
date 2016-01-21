@@ -10,24 +10,20 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
- * @author night
+ * @author Adam Morrison
  */
 public class weather extends javax.swing.JPanel {
 
-    Timer t1 = new Timer(60000, (ActionListener) new TimerListener());
+    Timer t1 = new Timer(60000, (ActionListener) new TimerListener()); // declare timer object for once a minute
 
-    WeatherDoc doc = new WeatherDoc("4113", "c"); //Your weather API location and units system
+    WeatherDoc doc = new WeatherDoc("4113", "c"); // Weather API location and units system
 
-    WeatherDisplay disp = new WeatherDisplay(); //Create WeatherDisplay object
+    WeatherDisplay disp = new WeatherDisplay(); // Create WeatherDisplay object
 
-    String temp, tempU, conditions, wChill;
+    String temp, tempU, conditions, wChill; // global string variable that will hold the conditions
+    
+    // setting varios images to be used as weather icons
     Image weatherBackground = Toolkit.getDefaultToolkit().getImage("space25.jpg");
     Image mixedRainAndSnow = Toolkit.getDefaultToolkit().getImage("weatherIcons\\mixed rain and snow.png");
     Image partlyCloudy = Toolkit.getDefaultToolkit().getImage("weatherIcons\\partly cloudy.png");
@@ -39,7 +35,7 @@ public class weather extends javax.swing.JPanel {
     Image sunny = Toolkit.getDefaultToolkit().getImage("weatherIcons\\sunny.png");
     Image tornado = Toolkit.getDefaultToolkit().getImage("weatherIcons\\ tornado.png");
 
-    Font font;
+    Font font; // font variable
 
     /**
      * Creates new form weather
@@ -48,6 +44,9 @@ public class weather extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     * starts timer, and displays the current weather
+     */
     public void start() {
         t1.start();
         getWeather();
@@ -57,45 +56,68 @@ public class weather extends javax.swing.JPanel {
     private class TimerListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            getWeather();
-            repaint();
+            getWeather();   // call the getWeather method
+            repaint();      // call the paintComponent method
         }
     }
 
+    /**
+     * gets the current weather conditions
+     */
     private void getWeather() {
-        temp = disp.getTemperature();
-        tempU = disp.getTemperatureUnit();
-        conditions = disp.getCondition();
-        wChill = disp.getWindChill();
+        temp = disp.getTemperature(); // sets temp to the current temurature
+        tempU = disp.getTemperatureUnit(); // sets tempU to the current unit being used
+        conditions = disp.getCondition(); // sets conditions to the current condition
+        wChill = disp.getWindChill(); // sets wChil to the current wind chill
     }
 
+    /**
+     * displays text for the weather
+     * @param g Graphics object
+     */
     private void showWeather(Graphics g) {
-        font = new Font("Calisto MT", Font.PLAIN, 15);
-        g.setFont(font);
-        g.setColor(Color.white);
-
-        g.drawString(" Conditions: " + conditions, 0, 290);
-        g.drawString(" Tempurture: " + temp + " " + tempU, 0, 310);
-        g.drawString(" Wind chill: " + wChill + " " + tempU, 0, 330);
-
+        font = new Font("Calisto MT", Font.PLAIN, 15); // set font type
+        g.setFont(font); // set the graphics object to the font Font
+        g.setColor(Color.white); // set the graphics object to the colour white
+        g.drawString(" Conditions: " + conditions, 0, 290); // display the conditions
+        g.drawString(" Tempurture: " + temp + " " + tempU, 0, 310); // display the tempurature
+        g.drawString(" Wind chill: " + wChill + " " + tempU, 0, 330); // display the wind chill
     }
 
     public void paintComponent(Graphics g) {
-        g.drawImage(weatherBackground, 0, 0, this);
+        g.drawImage(weatherBackground, 0, 0, this); // draw background image
         Image show = null;
-        if (conditions.equals("Light Snow Shower")){
+        if (conditions.equals("Light Snow Shower")) {
             show = mixedRainAndSnow;
-        } else if (conditions.equals("Partly Cloudy")){
+        } else if (conditions.equals("Partly Cloudy")) {
             show = partlyCloudy;
-        } else if (conditions.equals("Couldy")){
-            
-        } else if (conditions.equals("Mostly Cloudy")){
-            
-        } else if (conditions.equals("Scattered Showers")){
-            
+        } else if (conditions.equals("Couldy")) {
+            show = cloudy;
+        } else if (conditions.equals("Mostly Cloudy")) {
+            show = mostlyCloudy;
+        } else if (conditions.equals("Scattered Showers")) {
+            show = scatteredShowers;
+        } else if (conditions.equals("Scattered Snow Showers")) {
+            show = mixedRainAndSnow;
+        } else if (conditions.equals("Showers")) {
+            show = showers;
+        } else if (conditions.equals("Mixed Rain and Snow")) {
+            show = mixedRainAndSnow;
+        } else if (conditions.equals("Drizzle")) {
+            show = showers;
+        } else if (conditions.equals("Snow Flurries")) {
+            show = snow;
+        } else if (conditions.equals("Snow")) {
+            show = snow;
+        } else if (conditions.equals("Sunny")) {
+            show = sunny;
+        } else if (conditions.equals("Heavy Snow")){
+            show = snow;
+        } else if (conditions.equals("Snow Showers")){
+            show = snow;
         }
-        g.drawImage(show, -15, -125, this);
-        showWeather(g);
+        g.drawImage(show, -15, -125, this); // draw whatever the condition is currently
+        showWeather(g); // call the showWeather meathod with the Graphics
     }
 
     /**
