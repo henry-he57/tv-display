@@ -1,9 +1,3 @@
-
-import java.awt.FlowLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,10 +20,7 @@ public class TvDisplay extends javax.swing.JFrame {
         imageDisplay.startSlideShow(slideshowImage);
         timeDisplay.startClock(time,date);
     }
-
-    public void setImage(ImageIcon updatedImage){
-        slideshowImage.setIcon(updatedImage);
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,7 +45,7 @@ public class TvDisplay extends javax.swing.JFrame {
         weather2.setLayout(weather2Layout);
         weather2Layout.setHorizontalGroup(
             weather2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         weather2Layout.setVerticalGroup(
             weather2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,16 +80,17 @@ public class TvDisplay extends javax.swing.JFrame {
         );
         twitterDisplayLayout.setVerticalGroup(
             twitterDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 121, Short.MAX_VALUE)
+            .addGap(0, 182, Short.MAX_VALUE)
         );
 
-        date.setFont(new java.awt.Font("Serif", 1, 40)); // NOI18N
+        date.setFont(new java.awt.Font("Roboto", 1, 40)); // NOI18N
+        date.setForeground(new java.awt.Color(0, 0, 204));
         date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        date.setText("January 20, 2016");
 
-        time.setFont(new java.awt.Font("DS-Digital", 1, 60)); // NOI18N
+        time.setFont(new java.awt.Font("DS-Digital", 1, 74)); // NOI18N
         time.setForeground(new java.awt.Color(0, 165, 255));
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        time.setText("12:56:45 AM");
         time.setToolTipText("");
         time.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -116,8 +108,8 @@ public class TvDisplay extends javax.swing.JFrame {
             .addGroup(timeDisplayLayout.createSequentialGroup()
                 .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(time)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
