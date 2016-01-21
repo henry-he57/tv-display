@@ -1,4 +1,3 @@
-
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,22 +5,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author 341167922
+ * @author Henry He
  */
 public class ImageDisplay extends javax.swing.JPanel {
 
+    //declare variables
+    int x = 1;  //current picture to be shown on screen
+    Timer slideshow;    //slideshow timer
+    JLabel temp;    //JLabel from Frame to display images
+    
+    //list to hold picture names (These are what the images must be named in the "pictures" folder)
     String[] list = {"pictures\\Image1.jpg","pictures\\Image2.jpg","pictures\\Image3.jpg","pictures\\Image4.jpg","pictures\\Image5.jpg"};
-    int x = 1;
-    Timer slideshow;
-    JLabel temp;
     
     /**
      * Creates new form ImageDisplay
@@ -29,12 +25,16 @@ public class ImageDisplay extends javax.swing.JPanel {
     public ImageDisplay() {
         initComponents();
         
-        slideshow = new Timer (10000, new ActionListener(){
+        //set slideshow timer to update image every 10 seconds
+        slideshow = new Timer (10000, new ActionListener(){ 
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setImageSize(x, temp);
+            //display image
+            displayImage(x, temp);
+            //set to show next picture
             x+=1;
+            //reset picture count when limit is reached
             if (x >= list.length){
                 x = 0;
             }
@@ -44,18 +44,36 @@ public class ImageDisplay extends javax.swing.JPanel {
         
     }
     
-    public void setImageSize(int i,JLabel pic){
+    /**
+     * Henry He
+     * Rescales images so they are able to fit within the slideshow window and displays it
+     * 
+     * @param i the picture to rescale in the list
+     * @param pic the JLabel to display the picture on
+     */
+    public void displayImage(int i,JLabel pic){
+        
+        //create new image from the list for scaling
         ImageIcon icon = new ImageIcon(list[i]);
         Image img = icon.getImage();
+        
+        //scale the image and convert back to an ImageIcon
         Image scaledImg = img.getScaledInstance(910, 575, Image.SCALE_SMOOTH);
         ImageIcon newImc = new ImageIcon(scaledImg);
+        
+        //set the JLabel to the current ImageIcon
         pic.setIcon(newImc);
     }
     
+    /**
+     * Henry He
+     * Start the slideshow
+     * @param pic the JLabel to display the picture on
+     */
     public void startSlideShow(JLabel pic){
-        slideshow.start();
-        setImageSize(0,pic );
-        temp = pic;
+        slideshow.start();  //start the slideshow timer
+        displayImage(0,pic );   //display a starting image
+        temp = pic; //pass the JLabel from the frame into the panel
     }
     
     /**

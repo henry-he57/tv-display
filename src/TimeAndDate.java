@@ -1,12 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormatSymbols;
@@ -17,15 +8,16 @@ import javax.swing.Timer;
 
 /**
  *
- * @author Henry
+ * @author Henry He
  */
 public class TimeAndDate extends javax.swing.JPanel {
-
-    Image clockBackground = Toolkit.getDefaultToolkit().getImage("ClockBackground.jpg");
-    Image scaledClockBackground = clockBackground.getScaledInstance(390, 220, Image.SCALE_SMOOTH);
-    JLabel timeLabel;
-    JLabel dateLabel;
-    Calendar cal = new GregorianCalendar();
+    
+    //define variables
+    JLabel timeLabel;   //JLabel to display the time
+    JLabel dateLabel;   //JLabelt to display the date
+    Calendar cal = new GregorianCalendar(); //calendar to get time
+    
+    //get time from calendar
     int second = cal.get(Calendar.SECOND);
     int minute = cal.get(Calendar.MINUTE);
     int hour = cal.get(Calendar.HOUR);
@@ -36,7 +28,8 @@ public class TimeAndDate extends javax.swing.JPanel {
     int year = cal.get(Calendar.YEAR);
     int date = cal.get(Calendar.DAY_OF_MONTH);
 
-    Timer clockTimer = new Timer(5, (ActionListener) new TimerListener());
+    //clock timer to update time and date
+    Timer clockTimer = new Timer(5, (ActionListener) new TimerListener());  
 
     private class TimerListener implements ActionListener {
 
@@ -52,23 +45,42 @@ public class TimeAndDate extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     * 
+     * @param tempTimeLabel JLabel to use from Frame to update time
+     * @param tempDateLabel JLabel to use from Frame to update date
+     */
     public void startClock(JLabel tempTimeLabel, JLabel tempDateLabel) {
-        clockTimer.start();
+        clockTimer.start(); //start the clock timer
+        
+        //pass in time and date JLabel from Frame into panel
         timeLabel = tempTimeLabel;
         dateLabel = tempDateLabel;
     }
 
+    /**
+     * Update the time and date
+     */
     public void updateClock() {
-        Calendar cal = new GregorianCalendar();
+        //retrive time data
         second = cal.get(Calendar.SECOND);
         minute = cal.get(Calendar.MINUTE);
         hour = cal.get(Calendar.HOUR);
         AM_PM = cal.get(Calendar.AM_PM);
+        
+        //convert AM_PM int to String
         if (AM_PM == 0) {
             AMPM = "AM";
         } else {
             AMPM = "PM";
         }
+        
+        //set hour 0 of "PM" to 12 PM
+        if (hour == 0 && AMPM.equals("PM")){
+            hour = 12;
+        }
+        
+        //print out time while accomadating for single digits
         if (second < 10 && minute < 10) {
             timeLabel.setText(hour + ":0" + minute + ":0" + second + " " + AMPM);
         } else if (second < 10) {
@@ -79,10 +91,13 @@ public class TimeAndDate extends javax.swing.JPanel {
             timeLabel.setText(hour + ":" + minute + ":" + second + " " + AMPM);
         }
         
+        //retrieve date data
         month = cal.get(Calendar.MONTH);
         monthString = new DateFormatSymbols().getMonths()[month];
         year = cal.get(Calendar.YEAR);
         date = cal.get(Calendar.DAY_OF_MONTH);
+        
+        //print out date
         dateLabel.setText(monthString + " " + date + ", " + year);
     }
 
