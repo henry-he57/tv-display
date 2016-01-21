@@ -8,8 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
- *
- * @author Henry He
+ * @author Henry He, and Adam Morrison
  */
 public class TimeAndDate extends javax.swing.JPanel {
 

@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author 341167922
+ * @author Henry He, and Adam Morrison
  */
 public class TvDisplay extends javax.swing.JFrame {
 
@@ -15,10 +8,10 @@ public class TvDisplay extends javax.swing.JFrame {
      */
     public TvDisplay() {
         initComponents();
-        weather2.start();
-        twitterDisplay.startTwitterTimer(tweets);
-        imageDisplay.startSlideShow(slideshowImage);
-        timeDisplay.startClock(time,date);
+        weather2.start(); // call to start weather
+        twitterDisplay.startTwitterTimer(tweets); // call to start twitterDisplay with tweets
+        imageDisplay.startSlideShow(slideshowImage); // call to start imageDisplay with slideshowImage
+        timeDisplay.startClock(time,date); // call to start timeDisplay with time amd date
     }
     
     /**
