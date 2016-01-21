@@ -16,7 +16,7 @@ public class TvDisplay extends javax.swing.JFrame {
     public TvDisplay() {
         initComponents();
         weather2.start();
-        //twitterDisplay.startTwitterTimer();
+        twitterDisplay.startTwitterTimer(tweets);
         imageDisplay.startSlideShow(slideshowImage);
         timeDisplay.startClock(time,date);
     }
@@ -34,6 +34,7 @@ public class TvDisplay extends javax.swing.JFrame {
         imageDisplay = new ImageDisplay();
         slideshowImage = new javax.swing.JLabel();
         twitterDisplay = new TwitterFeed();
+        tweets = new javax.swing.JLabel();
         timeDisplay = new TimeAndDate();
         date = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
@@ -73,15 +74,20 @@ public class TvDisplay extends javax.swing.JFrame {
                 .addComponent(slideshowImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tweets.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        tweets.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout twitterDisplayLayout = new javax.swing.GroupLayout(twitterDisplay);
         twitterDisplay.setLayout(twitterDisplayLayout);
         twitterDisplayLayout.setHorizontalGroup(
             twitterDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(tweets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         twitterDisplayLayout.setVerticalGroup(
             twitterDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGroup(twitterDisplayLayout.createSequentialGroup()
+                .addComponent(tweets, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         date.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
@@ -187,6 +193,7 @@ public class TvDisplay extends javax.swing.JFrame {
     public javax.swing.JLabel slideshowImage;
     private javax.swing.JLabel time;
     private TimeAndDate timeDisplay;
+    private javax.swing.JLabel tweets;
     private TwitterFeed twitterDisplay;
     private weather weather2;
     // End of variables declaration//GEN-END:variables

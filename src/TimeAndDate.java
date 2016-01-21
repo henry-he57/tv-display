@@ -1,3 +1,4 @@
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormatSymbols;
@@ -11,12 +12,12 @@ import javax.swing.Timer;
  * @author Henry He
  */
 public class TimeAndDate extends javax.swing.JPanel {
-    
+
     //define variables
     JLabel timeLabel;   //JLabel to display the time
-    JLabel dateLabel;   //JLabelt to display the date
+    JLabel dateLabel;   //JLabel to display the date
     Calendar cal = new GregorianCalendar(); //calendar to get time
-    
+
     //get time from calendar
     int second = cal.get(Calendar.SECOND);
     int minute = cal.get(Calendar.MINUTE);
@@ -29,14 +30,12 @@ public class TimeAndDate extends javax.swing.JPanel {
     int date = cal.get(Calendar.DAY_OF_MONTH);
 
     //clock timer to update time and date
-    Timer clockTimer = new Timer(5, (ActionListener) new TimerListener());  
-
-    private class TimerListener implements ActionListener {
+    Timer clockTimer = new Timer(10, new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
             updateClock();
         }
-    }
+    });
 
     /**
      * Creates new form TimeAndDate
@@ -46,13 +45,13 @@ public class TimeAndDate extends javax.swing.JPanel {
     }
 
     /**
-     * 
+     *
      * @param tempTimeLabel JLabel to use from Frame to update time
      * @param tempDateLabel JLabel to use from Frame to update date
      */
     public void startClock(JLabel tempTimeLabel, JLabel tempDateLabel) {
         clockTimer.start(); //start the clock timer
-        
+
         //pass in time and date JLabel from Frame into panel
         timeLabel = tempTimeLabel;
         dateLabel = tempDateLabel;
@@ -62,24 +61,25 @@ public class TimeAndDate extends javax.swing.JPanel {
      * Update the time and date
      */
     public void updateClock() {
+        Calendar cal = new GregorianCalendar(); //calendar to get time
         //retrive time data
         second = cal.get(Calendar.SECOND);
         minute = cal.get(Calendar.MINUTE);
         hour = cal.get(Calendar.HOUR);
         AM_PM = cal.get(Calendar.AM_PM);
-        
+
         //convert AM_PM int to String
         if (AM_PM == 0) {
             AMPM = "AM";
         } else {
             AMPM = "PM";
         }
-        
+
         //set hour 0 of "PM" to 12 PM
-        if (hour == 0 && AMPM.equals("PM")){
+        if (hour == 0 && AMPM.equals("PM")) {
             hour = 12;
         }
-        
+
         //print out time while accomadating for single digits
         if (second < 10 && minute < 10) {
             timeLabel.setText(hour + ":0" + minute + ":0" + second + " " + AMPM);
@@ -90,13 +90,13 @@ public class TimeAndDate extends javax.swing.JPanel {
         } else {
             timeLabel.setText(hour + ":" + minute + ":" + second + " " + AMPM);
         }
-        
+
         //retrieve date data
         month = cal.get(Calendar.MONTH);
         monthString = new DateFormatSymbols().getMonths()[month];
         year = cal.get(Calendar.YEAR);
         date = cal.get(Calendar.DAY_OF_MONTH);
-        
+
         //print out date
         dateLabel.setText(monthString + " " + date + ", " + year);
     }
