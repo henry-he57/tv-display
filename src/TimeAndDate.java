@@ -3,59 +3,89 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JLabel;
+import javax.swing.Timer;
+
 /**
  *
  * @author Henry
  */
 public class TimeAndDate extends javax.swing.JPanel {
-Image clockBackground = Toolkit.getDefaultToolkit().getImage("ClockBackground.jpg");
-Image scaledClockBackground = clockBackground.getScaledInstance(390, 220, Image.SCALE_SMOOTH);
-JLabel tempLabel;
+
+    Image clockBackground = Toolkit.getDefaultToolkit().getImage("ClockBackground.jpg");
+    Image scaledClockBackground = clockBackground.getScaledInstance(390, 220, Image.SCALE_SMOOTH);
+    JLabel timeLabel;
+    JLabel dateLabel;
+    Calendar cal = new GregorianCalendar();
+    int second = cal.get(Calendar.SECOND);
+    int minute = cal.get(Calendar.MINUTE);
+    int hour = cal.get(Calendar.HOUR);
+    int AM_PM = cal.get(Calendar.AM_PM);
+    String AMPM;
+    int month = cal.get(Calendar.MONTH);
+    String monthString = new DateFormatSymbols().getMonths()[month];
+    int year = cal.get(Calendar.YEAR);
+    int date = cal.get(Calendar.DAY_OF_MONTH);
+
+    Timer clockTimer = new Timer(5, (ActionListener) new TimerListener());
+
+    private class TimerListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            updateClock();
+        }
+    }
+
     /**
      * Creates new form TimeAndDate
      */
     public TimeAndDate() {
         initComponents();
-        
-        new Thread(){
-            public void run(){
-                while(true){
-                    Calendar cal = new GregorianCalendar();
-        int second = cal.get(Calendar.SECOND);
-        int minute = cal.get(Calendar.MINUTE);
-        int hour = cal.get(Calendar.HOUR);
-        int AM_PM = cal.get(Calendar.AM_PM);
-        tempLabel.setText(hour + ":" + minute + ":" + second);
-                }
-            }
-        }.start();
     }
 
-    public void currentDate(JLabel dateLabel){
+    public void startClock(JLabel tempTimeLabel, JLabel tempDateLabel) {
+        clockTimer.start();
+        timeLabel = tempTimeLabel;
+        dateLabel = tempDateLabel;
+    }
+
+    public void updateClock() {
         Calendar cal = new GregorianCalendar();
-        int month = cal.get(Calendar.MONTH);
-        String monthString = new DateFormatSymbols().getMonths()[month];
-        int year = cal.get(Calendar.YEAR);
-        int date = cal.get(Calendar.DAY_OF_MONTH);
+        second = cal.get(Calendar.SECOND);
+        minute = cal.get(Calendar.MINUTE);
+        hour = cal.get(Calendar.HOUR);
+        AM_PM = cal.get(Calendar.AM_PM);
+        if (AM_PM == 0) {
+            AMPM = "AM";
+        } else {
+            AMPM = "PM";
+        }
+        if (second < 10 && minute < 10) {
+            timeLabel.setText(hour + ":0" + minute + ":0" + second + " " + AMPM);
+        } else if (second < 10) {
+            timeLabel.setText(hour + ":" + minute + ":0" + second + " " + AMPM);
+        } else if (minute < 10) {
+            timeLabel.setText(hour + ":0" + minute + ":" + second + " " + AMPM);
+        } else {
+            timeLabel.setText(hour + ":" + minute + ":" + second + " " + AMPM);
+        }
+        
+        month = cal.get(Calendar.MONTH);
+        monthString = new DateFormatSymbols().getMonths()[month];
+        year = cal.get(Calendar.YEAR);
+        date = cal.get(Calendar.DAY_OF_MONTH);
         dateLabel.setText(monthString + " " + date + ", " + year);
     }
-    
-    public void currentTime(JLabel timeLabel){
-        Calendar cal = new GregorianCalendar();
-        int second = cal.get(Calendar.SECOND);
-        int minute = cal.get(Calendar.MINUTE);
-        int hour = cal.get(Calendar.HOUR);
-        int AM_PM = cal.get(Calendar.AM_PM);
-        //timeLabel.setText(hour + ":" + minute + ":" + second);
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

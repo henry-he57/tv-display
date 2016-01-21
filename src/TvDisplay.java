@@ -24,8 +24,7 @@ public class TvDisplay extends javax.swing.JFrame {
         weather2.start();
         //twitterDisplay.startTwitterTimer();
         imageDisplay.startSlideShow(slideshowImage);
-        timeDisplay.currentDate(date);
-        timeDisplay.currentTime(time);
+        timeDisplay.startClock(time,date);
     }
 
     public void setImage(ImageIcon updatedImage){
@@ -45,17 +44,17 @@ public class TvDisplay extends javax.swing.JFrame {
         slideshowImage = new javax.swing.JLabel();
         twitterDisplay = new TwitterFeed();
         timeDisplay = new TimeAndDate();
-        time = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 102));
 
         javax.swing.GroupLayout weather2Layout = new javax.swing.GroupLayout(weather2);
         weather2.setLayout(weather2Layout);
         weather2Layout.setHorizontalGroup(
             weather2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 338, Short.MAX_VALUE)
         );
         weather2Layout.setVerticalGroup(
             weather2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,49 +89,44 @@ public class TvDisplay extends javax.swing.JFrame {
         );
         twitterDisplayLayout.setVerticalGroup(
             twitterDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
+            .addGap(0, 121, Short.MAX_VALUE)
         );
+
+        date.setFont(new java.awt.Font("Serif", 1, 40)); // NOI18N
+        date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         time.setFont(new java.awt.Font("DS-Digital", 1, 60)); // NOI18N
         time.setForeground(new java.awt.Color(0, 165, 255));
         time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        time.setText("12:56:45 AM");
         time.setToolTipText("");
         time.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        date.setFont(new java.awt.Font("Serif", 1, 40)); // NOI18N
-        date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout timeDisplayLayout = new javax.swing.GroupLayout(timeDisplay);
         timeDisplay.setLayout(timeDisplayLayout);
         timeDisplayLayout.setHorizontalGroup(
             timeDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
             .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(timeDisplayLayout.createSequentialGroup()
+                .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         timeDisplayLayout.setVerticalGroup(
             timeDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(timeDisplayLayout.createSequentialGroup()
                 .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(time)
+                .addContainerGap(210, Short.MAX_VALUE))
         );
-
-        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(imageDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(149, 149, 149)))
+                .addComponent(imageDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(weather2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(timeDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -145,17 +139,14 @@ public class TvDisplay extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addGap(0, 38, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(weather2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(timeDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(19, 19, 19)
-                .addComponent(twitterDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(timeDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(twitterDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -201,7 +192,6 @@ public class TvDisplay extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel date;
     private ImageDisplay imageDisplay;
-    private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel slideshowImage;
     private javax.swing.JLabel time;
     private TimeAndDate timeDisplay;
